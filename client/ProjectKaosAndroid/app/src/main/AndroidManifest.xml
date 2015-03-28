@@ -6,6 +6,7 @@
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.READ_PROFILE" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <!--start of parse stuff-->
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.WAKE_LOCK"/>
@@ -17,6 +18,7 @@
     <permission android:protectionLevel="signature"
         android:name="package.name.permission.C2D_MESSAGE"/>
     <uses-permission android:name="package.name.permission.C2D_MESSAGE" />
+    <!-- end parse stuff-->
 
     <application
         android:allowBackup="true"
@@ -33,6 +35,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <!--start parse stuff-->
         <service android:name = "com.parse.PushService" />
         <receiver android:name="com.parse.ParseBroadcastReceiver">
             <intent-filter>
@@ -56,6 +59,7 @@
                 <action android:name="com.parse.push.intent.OPEN" />
             </intent-filter>
         </receiver>
+        <!-- end parse stuff-->
     </application>
 
 </manifest>
