@@ -6,7 +6,7 @@ function GCM-Server(apiKey) {
 	this._sender = new gcm.Sender(apiKey);
 };
 
-GCM-Server.prototype = {
+GCM_Server.prototype = {
 	_logError : function(err) {
 		console.error(err);
 	};
