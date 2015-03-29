@@ -12,9 +12,13 @@ Template.body.events({
 		var nick = template.find('[name="nick"]').value;
 		var channel = template.find('[name="channel"]').value;
 		Meteor.call('newConn', server, nick, channel, Meteor.userId());
+	},
+	"submit .send-message": function(event, template) {
+		var message = event.target.message.value;
+		Meteor.call('sendMessage', message, Meteor.userId());
 	}
-
 });
+
 Template.main.helpers({
 	userLoggedIn: function() {
 		return Meteor.user()

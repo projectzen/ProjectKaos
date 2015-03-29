@@ -23,6 +23,7 @@
 				<li><b>{{from}}:</b> {{message}}</li>
 				{{/each}}
 				</ul>
+				{{> sendForm}}
 			{{else}}
 				{{> connectionForm}}
 			{{/if}}
@@ -38,5 +39,11 @@
 	<input type="text" name="nick" placeholder="Nick"/><br>
 	<input type="text" name="channel" placeholder="Channel"/><br>
 	<button id="submitConnection">Submit</button>
+</form>
+</template>
+
+<template name="sendForm">
+<form class="send-message">
+	<input type="text" name="message" placeholder="Type your message here"/>
 </form>
 </template>
