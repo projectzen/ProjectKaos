@@ -13,21 +13,28 @@
 <template name="main">
 	<div class="container">
 		<header>
-			<h1>Friends Online</h1>
-			<!--add friends form-->
+			<h1>Project Kaos</h1>
 			<form class ="new-friend">
 				<input type="text" name="text" placeholder="Type to add new friends" />
 			</form>
 		</header>
 
 		{{#if userLoggedIn}}
-			<ul>
-				{{#each friends}}
-					{{> friend}}
-				{{/each}}
-			</ul>
+			{{#if connectionSet}}
+			{{else}}
+				{{> connectionForm}}
+			{{/if}}
 		{{else}}
-		{{> loginButtons}}
+			{{> loginButtons}}
 		{{/if}}
 	</div>
+</template>
+
+<template name="connectionForm">
+<form class="new-connection">
+	<input type="text" name="server" placeholder="Server"/><br>
+	<input type="text" name="nick" placeholder="Nick"/><br>
+	<input type="text" name="channel" placeholder="Channel"/><br>
+	<button id="submitConnection">Submit</button>
+</form>
 </template>

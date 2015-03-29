@@ -7,15 +7,11 @@ Template.body.helpers({
 	}
 });
 Template.body.events({
-	"submit .new-friend": function(event){
-		var text = event.target.text.value;
-		Friends.insert({
-			text: text,
-			createdAt: new Date()
-			//realName: text//current time
-		});
-		event.targer.text.value="";
-		return false;
+	"click #submitConnection": function(event, template){
+		var server = template.find('[name="server"]').value;
+		var nick = template.find('[name="nick"]').value;
+		var channel = template.find('[name="channel"]').value;
+		Meteor.call('newConn', server, nick, channel);
 	}
 
 });
