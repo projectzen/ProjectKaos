@@ -6,11 +6,21 @@ if (Meteor.isClient) {
    
    Template.body.helpers({
                          friends: function(){
-                         return Friends.find({}, {sort:{createdAt: -1}});
+                         if (Session.get("hideCompleted")){
+                         return Friends.find({checked: {$ne: true}}, {sort:{createdAt: -1}});
+                         } else {
+                           return Friends.find({}, {sort:{createdAt: -1}});
+                         }
+                         },
+                         hideCompleted: function () {
+                         return Session.get("hideCompleted");
                          }
                          });
    Template.body.events({
-                        "submit .new-friend": function(event){
+                        "change .hide-completed input": function (event){
+                        Session.set("hideCompleted",event.target.checked);
+                        },
+                        "submit .new-friend": function (event) {
                         var text = event.target.text.value;
                         Friends.insert({
                                        text: text,
