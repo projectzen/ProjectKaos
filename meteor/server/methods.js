@@ -12,6 +12,14 @@ Meteor.methods({
             console.log(nick + ' joined ' + message);
             Messages.insert({from: channel, message:nick + ' joined ' + channel, connectionId: connectionId, userId: userId});
         }));
+        IRCClients[userId].addListener('quit', Meteor.bindEnvironment(function(nick, reason, channels, message) {
+            console.log(nick + ' quit (' + reason + ')');
+            Messages.insert({from: 'server', message:nick + ' quit (' + reason + ')', connectionId: connectionId, userId: userId});
+        }));
+        IRCClients[userId].addListener('part', Meteor.bindEnvironment(function(channel, nick, reason, message) {
+            console(nick + ' left (' + reason +')');
+            Messages.insert({from: channel, message:nick + 'left (' + reason +')', connectionId:connectionId, userId, userId});
+        }));
 	},
 	sendMessage: function(message, userId) {
 		var channel = Connections.find({userId: userId}).fetch()[0].channel;
