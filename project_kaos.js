@@ -6,7 +6,7 @@ if (Meteor.isClient) {
 
   Template.body.helpers({
     friends: function(){
-      return Friends.find({});
+                        return Friends.find({}, {sort:{createdAt: -1}});
     }
   });
     Template.body.events({
