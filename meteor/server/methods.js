@@ -10,7 +10,7 @@ Meteor.methods({
 		}));
         IRCClients[userId].addListener('join', Meteor.bindEnvironment(function(channel, nick, message) {
             console.log(nick + ' joined ' + message);
-            Messages.insert({from: channel, message:nick + ' joined ' + message, connectionId: connectionId userId: userId});
+            Messages.insert({from: channel, message:nick + ' joined ' + channel, connectionId: connectionId, userId: userId});
         }));
 	},
 	sendMessage: function(message, userId) {
