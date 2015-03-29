@@ -11,6 +11,10 @@ module.exports = function(server, nickname, channels) {
 		// do something
 	});
 
+    client.addlistener('error', function(message) {
+        // do something
+    });
+
 	return client;
 }
 
