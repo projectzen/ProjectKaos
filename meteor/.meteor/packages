@@ -9,3 +9,6 @@ autopublish
 insecure
 accounts-facebook
 accounts-ui
+tarang:gcm
+accounts-base
+mrt:meteor-node-irc
