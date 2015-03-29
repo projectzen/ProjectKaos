@@ -22,6 +22,14 @@ if (Meteor.isClient) {
                         }
                         
                         });
+   Template.friend.events({
+                        "click .toggle-checked":function () {
+                          Friends.update(this._id, {$set: {checked: ! this.checked}});
+                        },
+                          "click .delete": function () {
+                          Friends.remove(this._id);
+                          }
+                          });
    
 }
 
