@@ -25,13 +25,7 @@ if (Meteor.isClient) {
       },
       "submit .new-friend": function (event) {
          var text = event.target.text.value;
-         Friends.insert({
-            text: text,
-            createdAt: new Date(),
-            owner: Meteor.user(),
-            username: Meteor.user().username
-            //realName: text//current time
-         });
+                        Meteor.call("addFriend",text);
          event.targer.text.value="";
          return false;
       }
@@ -39,10 +33,10 @@ if (Meteor.isClient) {
    });
    Template.friend.events({
                         "click .toggle-checked":function () {
-                          Friends.update(this._id, {$set: {checked: ! this.checked}});
+                          Meteor.call("setChecked", this._id, ! this.checked);
                         },
                           "click .delete": function () {
-                          Friends.remove(this._id);
+                          Meteor.call("deleteFriend", this._id);
                           }
                           });
    Accounts.ui.config({
@@ -51,6 +45,25 @@ if (Meteor.isClient) {
    
 }
 
+Meteor.methods({
+   addFriend: function (text) {
+      if (! Meteor.userId()){
+         throw new Meteor.Error("not-authorized");
+      }
+      Friends.insert({
+         text:text,
+         createdAt: new Date(),
+         owner: Meteor.userID(),
+         username: Meteor.user().username
+      });
+   },
+               deleteFriend: function (friendId){
+               Friends.remove(friendId);
+               },
+               setChecked: function (friendId, setChecked){
+               Friends.update(friendId, {$set: {checked: setChecked} });
+               }
+               });
 /* Template.hello.events({
  'click button': function () {
  // increment the counter when button is clicked
