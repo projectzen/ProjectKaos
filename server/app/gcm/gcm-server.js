@@ -9,6 +9,10 @@ function GCM_Server(apiKey) {
 };
 
 GCM_Server.prototype = {
+    new_sender : function(apikey) {
+        this._sender = new this._gcm.Sender(apikey);
+    },
+
 	_logError : function(err) {
 		console.error(err);
 	},
