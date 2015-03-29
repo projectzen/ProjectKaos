@@ -1,7 +1,7 @@
 
 var gcm = require('gcm');
 
-function GCM-Server(apiKey) {
+function GCM_Server(apiKey) {
 	this._gcm = gcm;
 	this._sender = new gcm.Sender(apiKey);
 };
