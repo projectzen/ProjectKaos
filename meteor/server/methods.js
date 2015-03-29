@@ -17,8 +17,8 @@ Meteor.methods({
             Messages.insert({from: 'server', message:nick + ' quit (' + reason + ')', connectionId: connectionId, userId: userId});
         }));
         IRCClients[userId].addListener('part', Meteor.bindEnvironment(function(channel, nick, reason, message) {
-            console(nick + ' left (' + reason +')');
-            Messages.insert({from: channel, message:nick + 'left (' + reason +')', connectionId:connectionId, userId, userId});
+            console.log(nick + ' left (' + reason +')');
+            Messages.insert({from: channel, message:nick + ' left (' + reason +')', connectionId:connectionId, userId: userId});
         }));
 	},
 	sendMessage: function(message, userId) {
