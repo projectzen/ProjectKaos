@@ -1,14 +1,50 @@
 <head>
-  <title>meteorFiles</title>
+   
+   <title>kaos connected</title>
+   
 </head>
 
-<body>
-  <h1>Welcome to Meteor!</h1>
 
-  {{> hello}}
+
+<body>
+   
+   <div class="container">
+      
+      <header>
+         
+         <h1>Friends Online</h1>
+         
+         <!--add friends form-->
+         
+         <form class ="new-friend">
+            
+            <input type="text" name="text" placeholder="Type to add new friends" />
+            
+         </form>
+         
+      </header>
+      
+      
+      
+      <ul>
+         
+         {{#each friends}}
+         
+         {{> friend}}
+         
+         {{/each}}
+         
+      </ul>
+      
+   </div>
+   
 </body>
 
-<template name="hello">
-  <button>Click Me</button>
-  <p>You've pressed the button {{counter}} times.</p>
+
+
+<template name="friend">
+   
+   <li>{{text}}</li>
+   
 </template>
+
