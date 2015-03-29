@@ -8,6 +8,10 @@ Meteor.methods({
 			console.log(from + ": " + message);
 			Messages.insert({from: from, message: message, connectionId: connectionId, userId: userId});
 		}));
+        IRCClients[userId].addListener('join', Meteor.bindEnvironment(function(channel, nick, message) {
+            console.log(nick + ' joined ' + message);
+            Messages.insert({from: channel, message:nick + ' joined ' + message, connectionId: connectionId userId: userId});
+        }));
 	},
 	sendMessage: function(message, userId) {
 		var channel = Connections.find({userId: userId}).fetch()[0].channel;
