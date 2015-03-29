@@ -5,33 +5,38 @@ if (Meteor.isClient) {
       //Session.setDefault('counter', 0);
    
    Template.body.helpers({
-                         friends: function(){
-                         if (Session.get("hideCompleted")){
-                         return Friends.find({checked: {$ne: true}}, {sort:{createdAt: -1}});
-                         } else {
-                           return Friends.find({}, {sort:{createdAt: -1}});
-                         }
-                         },
-                         hideCompleted: function () {
-                         return Session.get("hideCompleted");
-                         }
-                         });
+      friends: function(){
+         if (Session.get("hideCompleted")){
+            return Friends.find({checked: {$ne: true}}, {sort:{createdAt: -1}});
+         } else {
+            return Friends.find({}, {sort:{createdAt: -1}});
+         }
+      },
+      hideCompleted: function () {
+         return Session.get("hideCompleted");
+      },
+      incompleteCount: function () {
+         return Friends.find({checked: {$ne: true}}).count();
+      }
+   });
    Template.body.events({
-                        "change .hide-completed input": function (event){
-                        Session.set("hideCompleted",event.target.checked);
-                        },
-                        "submit .new-friend": function (event) {
-                        var text = event.target.text.value;
-                        Friends.insert({
-                                       text: text,
-                                       createdAt: new Date()
-                                       //realName: text//current time
-                                       });
-                        event.targer.text.value="";
-                        return false;
-                        }
+      "change .hide-completed input": function (event){
+         Session.set("hideCompleted",event.target.checked);
+      },
+      "submit .new-friend": function (event) {
+         var text = event.target.text.value;
+         Friends.insert({
+            text: text,
+            createdAt: new Date(),
+            owner: Meteor.user(),
+            username: Meteor.user().username
+            //realName: text//current time
+         });
+         event.targer.text.value="";
+         return false;
+      }
                         
-                        });
+   });
    Template.friend.events({
                         "click .toggle-checked":function () {
                           Friends.update(this._id, {$set: {checked: ! this.checked}});
@@ -40,6 +45,9 @@ if (Meteor.isClient) {
                           Friends.remove(this._id);
                           }
                           });
+   Accounts.ui.config({
+      passwordSignupFields: "USERNAME_ONLY"
+                      });
    
 }
 
