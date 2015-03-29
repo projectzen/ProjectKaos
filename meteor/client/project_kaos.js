@@ -16,6 +16,9 @@ Template.body.events({
 	"submit .send-message": function(event, template) {
 		var message = event.target.message.value;
 		Meteor.call('sendMessage', message, Meteor.userId());
+	},
+	"click #disconnect": function(event, template) {
+		Meteor.call('disconnect', Meteor.userId());
 	}
 });
 

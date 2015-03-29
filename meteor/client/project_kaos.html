@@ -14,10 +14,14 @@
 	<div class="container">
 		<header>
 			<h1>Project Kaos</h1>
+			{{#if userLoggedIn}}
+				{{> loginButtons}}
+			{{/if}}
 		</header>
 
 		{{#if userLoggedIn}}
 			{{#if connectionSet}}
+				<button id="disconnect">Disconnect</button><br>
 				<ul>
 				{{#each userMessages}}
 				<li><b>{{from}}:</b> {{message}}</li>
