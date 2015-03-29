@@ -16,7 +16,7 @@ Meteor.methods({
 		Messages.insert({from: nick, message: message, connectionId: Connections.find({userId: userId}).fetch()[0]._id, userId: userId});
 	},
 	disconnect: function(userId) {
-		IRCClients[userId].disconnect({message: "Project Kaos is shutting down..."});
+		IRCClients[userId].disconnect();
 		delete IRCClients.userId;
 		Connections.remove({userId: userId});
 		Messages.remove({userId: userId});
