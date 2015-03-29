@@ -19,3 +19,8 @@ Template.body.events({
 	}
 
 });
+Template.main.helpers({
+	userLoggedIn: function() {
+		return Meteor.user()
+	}
+});
